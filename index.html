@@ -291,7 +291,7 @@ function showTab(tab){
 // ─── DASHBOARD ────────────────────────────────
 async function renderDashboard(){
   try{
-    let bookingsQuery='bookings?select=*,drivers(*),platforms(*)&order=booking_date.desc,pickup_time.desc&limit=5';
+    let bookingsQuery='bookings_view?select=*,platforms(*)&order=booking_date.desc,pickup_time.desc&limit=5';
     let allQuery='bookings?select=*';
     if(currentRole==='driver'){
       bookingsQuery+=`&assigned_driver_id=eq.${currentDriverId}`;
@@ -330,7 +330,7 @@ async function renderDashboard(){
 // ─── BOOKINGS ─────────────────────────────────
 async function renderBookings(filter='all'){
   try{
-    let query='bookings?select=*,drivers(*),platforms(*)&order=booking_date.desc,pickup_time.desc';
+    let query='bookings_view?select=*,platforms(*)&order=booking_date.desc,pickup_time.desc';
     if(currentRole==='driver')query+=`&assigned_driver_id=eq.${currentDriverId}`;
     const bookings=await api(query);
     const filtered=filter==='all'?bookings:filter==='vip'?bookings.filter(b=>b.vip):filter==='unassigned'?bookings.filter(b=>!b.assigned_driver_id):bookings.filter(b=>b.status===filter);
@@ -371,7 +371,7 @@ function bookingCard(b){
       </div>
       <div class="booking-info-row">
         <div class="booking-info-item">👤 <span>${b.passenger_name||'—'}</span></div>
-        <div class="booking-info-item">🚗 <span>${b.drivers?b.drivers.name:'未派'}</span></div>
+        <div class="booking-info-item">🚗 <span>${b.driver_name:'未派'}</span></div>
         ${currentRole==='admin'?`<div class="booking-info-item">💳 <span>US$${b.platform_payout||0}</span></div><div class="booking-info-item profit-positive">💰 <span>+US$${profit||0}</span></div>`:`<div class="booking-info-item">💰 <span>US$${b.driver_payout||0}</span></div>`}
       </div>
       <div class="booking-actions" onclick="event.stopPropagation()">
@@ -418,7 +418,7 @@ async function viewBooking(id){
     </div>
     <div class="detail-section">
       <h3>${currentRole==='admin'?'司機 & 收入':'工資'}</h3>
-      <div class="detail-row"><span class="detail-key">司機</span><span>${b.drivers?.name||'未派'}</span></div>
+      <div class="detail-row"><span class="detail-key">司機</span><span>${b.driver_name||'未派'}</span></div>
       ${currentRole==='admin'?`
       <div class="detail-row"><span class="detail-key">平台收入</span><span>US$${b.platform_payout||0}</span></div>
       <div class="detail-row"><span class="detail-key">司機工資</span><span>US$${b.driver_payout||0}</span></div>
@@ -731,7 +731,7 @@ async function doSearch(){
   const res=document.getElementById('search-results');
   res.innerHTML='<div class="loading">搜尋中...</div>';
   try{
-    let query=`bookings?select=*,drivers(*),platforms(*)&or=(internal_code.ilike.*${encodeURIComponent(q)}*,passenger_name.ilike.*${encodeURIComponent(q)}*,passenger_phone.ilike.*${encodeURIComponent(q)}*,booking_ref.ilike.*${encodeURIComponent(q)}*,pickup_location.ilike.*${encodeURIComponent(q)}*,dropoff_location.ilike.*${encodeURIComponent(q)}*)&order=booking_date.desc`;
+    let query=`bookings_view?select=*,platforms(*)&or=(internal_code.ilike.*${encodeURIComponent(q)}*,passenger_name.ilike.*${encodeURIComponent(q)}*,passenger_phone.ilike.*${encodeURIComponent(q)}*,booking_ref.ilike.*${encodeURIComponent(q)}*,pickup_location.ilike.*${encodeURIComponent(q)}*,dropoff_location.ilike.*${encodeURIComponent(q)}*)&order=booking_date.desc`;
     if(currentRole==='driver')query+=`&assigned_driver_id=eq.${currentDriverId}`;
     const results=await api(query);
     res.innerHTML=results.length?
