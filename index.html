@@ -27,20 +27,20 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 #setup-screen{display:none;align-items:center;justify-content:center;min-height:100vh;padding:20px}
 .setup-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:480px;width:100%}
 #app{display:none;flex-direction:column;min-height:100vh}
-.topbar{background:var(--card);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
-.topbar-logo{font-weight:700;font-size:1.1rem;color:var(--gold)}
-.topbar-right{display:flex;align-items:center;gap:8px}
-.user-badge{font-size:.78rem;color:var(--muted);background:var(--bg);padding:4px 10px;border-radius:20px}
+.topbar{background:var(--card);border-bottom:1px solid var(--border);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+.topbar-logo{font-weight:700;font-size:1rem;color:var(--gold)}
+.topbar-right{display:flex;align-items:center;gap:6px}
+.user-badge{font-size:.75rem;color:var(--muted);background:var(--bg);padding:4px 8px;border-radius:20px}
 .nav{background:var(--card);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;gap:4px;padding:0 12px;scrollbar-width:none;position:sticky;top:56px;z-index:99}
 .nav::-webkit-scrollbar{display:none}
-.nav-btn{padding:12px 16px;border:none;background:none;color:var(--muted);cursor:pointer;font-size:.85rem;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s}
+.nav-btn{padding:12px 14px;border:none;background:none;color:var(--muted);cursor:pointer;font-size:.82rem;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s}
 .nav-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
 .content{flex:1;padding:16px;max-width:1200px;margin:0 auto;width:100%}
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer}
 .card.vip{border-left:3px solid var(--gold)}
 .card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-.card-meta{color:var(--muted);font-size:.8rem;margin-top:2px}
-.badge{display:inline-block;padding:3px 8px;border-radius:20px;font-size:.72rem;font-weight:600;text-transform:uppercase}
+.card-meta{color:var(--muted);font-size:.78rem;margin-top:2px}
+.badge{display:inline-block;padding:3px 8px;border-radius:20px;font-size:.7rem;font-weight:600;text-transform:uppercase}
 .badge-vip{background:rgba(245,166,35,.15);color:var(--gold)}
 .badge-pending{background:rgba(100,100,200,.15);color:#aab}
 .badge-confirmed{background:rgba(39,174,96,.15);color:#2ecc71}
@@ -49,33 +49,32 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
 @media(min-width:640px){.stats-row{grid-template-columns:repeat(4,1fr)}}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
-.stat-val{font-size:1.6rem;font-weight:700;color:var(--gold)}
-.stat-label{font-size:.78rem;color:var(--muted);margin-top:4px}
+.stat-val{font-size:1.5rem;font-weight:700;color:var(--gold)}
+.stat-label{font-size:.75rem;color:var(--muted);margin-top:4px}
 .btn{padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-size:.88rem;font-weight:600;transition:opacity .2s}
 .btn:hover{opacity:.85}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-gold{background:var(--gold);color:#000}
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
-.btn-sm{padding:6px 12px;font-size:.8rem}
+.btn-sm{padding:6px 12px;font-size:.78rem}
 .btn-whatsapp{background:#25D366;color:#fff}
 .btn-imessage{background:#007AFF;color:#fff}
-.btn-danger{background:rgba(233,69,96,.15);color:var(--accent);border:1px solid var(--accent)}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:flex-end;justify-content:center;z-index:200;padding:20px}
-@media(min-width:640px){.modal-overlay{align-items:center}}
-.modal{background:var(--card);border-radius:16px 16px 0 0;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:24px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:flex-end;justify-content:center;z-index:200;padding:0}
+@media(min-width:640px){.modal-overlay{align-items:center;padding:20px}}
+.modal{background:var(--card);border-radius:16px 16px 0 0;width:100%;max-width:620px;max-height:92vh;overflow-y:auto;padding:24px}
 @media(min-width:640px){.modal{border-radius:16px}}
 .modal-title{font-size:1.2rem;font-weight:700;margin-bottom:20px}
 .search-bar{display:flex;gap:8px;margin-bottom:16px}
 .search-bar input{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:8px;font-size:.9rem}
-.booking-route{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:.88rem}
-.booking-route .from,.booking-route .to{flex:1}
+.booking-route{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:.85rem}
+.booking-route .from,.booking-route .to{flex:1;font-size:.8rem}
 .booking-route .arrow{color:var(--muted);flex-shrink:0}
-.booking-info-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
-.booking-info-item{font-size:.8rem;color:var(--muted)}
+.booking-info-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.booking-info-item{font-size:.78rem;color:var(--muted)}
 .booking-info-item span{color:var(--text);font-weight:500}
 .booking-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.internal-code{font-family:monospace;font-size:.9rem;font-weight:700;color:var(--gold);background:rgba(245,166,35,.1);padding:2px 8px;border-radius:4px}
-.driver-card{display:flex;align-items:center;gap:14px}
+.internal-code{font-family:monospace;font-size:.88rem;font-weight:700;color:var(--gold);background:rgba(245,166,35,.1);padding:2px 8px;border-radius:4px}
+.driver-card-row{display:flex;align-items:center;gap:14px}
 .driver-avatar{width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;flex-shrink:0}
 .profit-positive{color:#2ecc71;font-weight:600}
 .profit-negative{color:var(--accent);font-weight:600}
@@ -83,15 +82,17 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .empty-icon{font-size:3rem;margin-bottom:12px}
 .loading{text-align:center;padding:40px;color:var(--muted)}
 .detail-section{margin-bottom:20px}
-.detail-section h3{font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
-.detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.detail-section h3{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:.88rem}
 .detail-row:last-child{border-bottom:none}
 .detail-key{color:var(--muted)}
 .filter-row{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
-.filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-size:.8rem;white-space:nowrap}
+.filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-size:.78rem;white-space:nowrap}
 .filter-btn.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
-.tag-lead{background:rgba(245,166,35,.2);color:var(--gold);padding:2px 6px;border-radius:4px;font-size:.72rem}
-.driver-my-bookings{background:rgba(245,166,35,.05);border:1px solid rgba(245,166,35,.2);border-radius:12px;padding:16px;margin-bottom:12px}
+.tag-lead{background:rgba(245,166,35,.2);color:var(--gold);padding:2px 6px;border-radius:4px;font-size:.7rem}
+.finance-box{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px}
+.finance-box-title{font-size:.82rem;color:var(--gold);font-weight:700;margin-bottom:12px}
+.profit-box{background:var(--card);border-radius:8px;padding:12px;margin-top:8px}
 </style>
 </head>
 <body>
@@ -105,58 +106,37 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <button class="tab-btn" onclick="switchLoginTab('driver')">司機</button>
     </div>
     <div id="admin-login">
-      <div class="form-group">
-        <label>用戶名</label>
-        <input type="text" id="admin-user" placeholder="starpower">
-      </div>
-      <div class="form-group">
-        <label>密碼</label>
-        <input type="password" id="admin-pass" placeholder="••••••••">
-      </div>
+      <div class="form-group"><label>用戶名</label><input type="text" id="admin-user" placeholder="starpower"></div>
+      <div class="form-group"><label>密碼</label><input type="password" id="admin-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
     </div>
     <div id="driver-login" style="display:none">
-      <div class="form-group">
-        <label>車牌號碼</label>
-        <input type="text" id="driver-plate" placeholder="例：LV944">
-      </div>
-      <div class="form-group">
-        <label>手機號碼（含國碼）</label>
-        <input type="text" id="driver-phone" placeholder="例：+85298034040">
-      </div>
+      <div class="form-group"><label>車牌號碼</label><input type="text" id="driver-plate" placeholder="例：LV944"></div>
+      <div class="form-group"><label>手機號碼（含國碼）</label><input type="text" id="driver-phone" placeholder="例：+85298034040"></div>
     </div>
     <div class="error-msg" id="login-error">用戶名或密碼錯誤</div>
     <button class="btn btn-gold" style="width:100%;padding:14px;margin-top:8px" onclick="doLogin()">登入 →</button>
   </div>
 </div>
-
 <div id="setup-screen">
   <div class="setup-box">
     <div class="logo-big">🔧</div>
     <h1>首次設定</h1>
     <p style="color:var(--muted);margin-bottom:24px;font-size:.9rem">請輸入 Supabase 連接資料</p>
-    <div class="form-group">
-      <label>Supabase Project URL</label>
-      <input type="text" id="setup-url" placeholder="https://xxxxxx.supabase.co">
-    </div>
-    <div class="form-group">
-      <label>Supabase Anon Public Key</label>
-      <input type="password" id="setup-key" placeholder="eyJhbGciOiJ...">
-    </div>
+    <div class="form-group"><label>Supabase Project URL</label><input type="text" id="setup-url" placeholder="https://xxxxxx.supabase.co"></div>
+    <div class="form-group"><label>Supabase Anon Public Key</label><input type="password" id="setup-key" placeholder="eyJhbGciOiJ..."></div>
     <button class="btn btn-gold" style="width:100%;padding:14px" onclick="saveSetup()">儲存設定 →</button>
   </div>
 </div>
-
 <div id="app">
   <div class="topbar">
     <div class="topbar-logo">⭐ StarPower HKG</div>
     <div class="topbar-right">
       <span class="user-badge" id="user-badge"></span>
-      <button class="btn btn-sm btn-ghost" onclick="showTab('search')" id="search-btn">🔍</button>
       <button class="btn btn-sm btn-primary" onclick="openNewBooking()" id="new-booking-btn">+ 新單</button>
       <button class="btn btn-sm btn-ghost" onclick="doLogout()">登出</button>
     </div>
   </div>
-  <div class="nav" id="main-nav">
+  <div class="nav">
     <button class="nav-btn active" onclick="showTab('dashboard')">📊 總覽</button>
     <button class="nav-btn" onclick="showTab('bookings')">📋 訂單</button>
     <button class="nav-btn admin-only" onclick="showTab('drivers')">👤 司機</button>
@@ -165,27 +145,21 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   </div>
   <div class="content" id="main-content"></div>
 </div>
-
 <div id="modal-overlay" class="modal-overlay" style="display:none" onclick="closeModal(event)">
   <div class="modal" id="modal-content" onclick="event.stopPropagation()"></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
 <script>
-// ─── CONFIG ───────────────────────────────────
 let SUPABASE_URL=localStorage.getItem('sp_url')||'';
 let SUPABASE_KEY=localStorage.getItem('sp_key')||'';
-let currentUser=null;
-let currentRole=null;
-let currentDriverId=null;
+let currentUser=null,currentRole=null,currentDriverId=null;
 let platforms=[],drivers=[];
-
 const ADMIN_USERS=[{user:'starpower',pass:'YX577lv944'}];
 
-// ─── INIT ─────────────────────────────────────
 window.onload=()=>{
   if(!SUPABASE_URL||!SUPABASE_KEY){
     document.getElementById('setup-screen').style.display='flex';
-  } else {
+  }else{
     document.getElementById('login-screen').style.display='flex';
   }
 };
@@ -195,8 +169,7 @@ function saveSetup(){
   const key=document.getElementById('setup-key').value.trim();
   if(!url||!key)return alert('請填寫所有欄位');
   SUPABASE_URL=url;SUPABASE_KEY=key;
-  localStorage.setItem('sp_url',url);
-  localStorage.setItem('sp_key',key);
+  localStorage.setItem('sp_url',url);localStorage.setItem('sp_key',key);
   document.getElementById('setup-screen').style.display='none';
   document.getElementById('login-screen').style.display='flex';
 }
@@ -210,23 +183,21 @@ function switchLoginTab(tab){
 async function doLogin(){
   const err=document.getElementById('login-error');
   err.style.display='none';
-  const adminTab=document.getElementById('admin-login').style.display!=='none';
-
-  if(adminTab){
+  const isAdmin=document.getElementById('admin-login').style.display!=='none';
+  if(isAdmin){
     const user=document.getElementById('admin-user').value.trim();
     const pass=document.getElementById('admin-pass').value;
     const match=ADMIN_USERS.find(a=>a.user===user&&a.pass===pass);
     if(!match){err.style.display='block';return;}
     currentUser=user;currentRole='admin';currentDriverId=null;
     await launchApp();
-  } else {
+  }else{
     const plate=document.getElementById('driver-plate').value.trim().toUpperCase();
     const phone=document.getElementById('driver-phone').value.trim();
     if(!plate||!phone){err.textContent='請填寫車牌同電話';err.style.display='block';return;}
     try{
-      await apiInit();
       const res=await api(`drivers?license_plate=eq.${encodeURIComponent(plate)}&phone=eq.${encodeURIComponent(phone)}&select=*`);
-      if(!res.length){err.textContent='車牌或電話唔啱，請重試';err.style.display='block';return;}
+      if(!res.length){err.textContent='車牌或電話唔啱';err.style.display='block';return;}
       currentUser=res[0].name;currentRole='driver';currentDriverId=res[0].id;
       await launchApp();
     }catch(e){err.textContent='登入失敗：'+e.message;err.style.display='block';}
@@ -239,7 +210,6 @@ async function launchApp(){
   document.getElementById('user-badge').textContent=currentRole==='admin'?'👑 '+currentUser:'🚗 '+currentUser;
   document.getElementById('new-booking-btn').style.display=currentRole==='admin'?'':'none';
   document.querySelectorAll('.admin-only').forEach(el=>el.style.display=currentRole==='admin'?'':'none');
-  await apiInit();
   await loadMasterData();
   showTab('dashboard');
 }
@@ -254,13 +224,13 @@ function doLogout(){
   document.getElementById('driver-phone').value='';
 }
 
-// ─── API ──────────────────────────────────────
-async function apiInit(){
-  if(!SUPABASE_URL||!SUPABASE_KEY)throw new Error('未設定 Supabase');
-}
-
 async function api(path,method='GET',body=null){
-  const opts={method,headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':method==='POST'?'return=representation':''}};
+  const opts={method,headers:{
+    'apikey':SUPABASE_KEY,
+    'Authorization':'Bearer '+SUPABASE_KEY,
+    'Content-Type':'application/json',
+    'Prefer':method==='POST'?'return=representation':''
+  }};
   if(body)opts.body=JSON.stringify(body);
   const r=await fetch(SUPABASE_URL+'/rest/v1/'+path,opts);
   if(!r.ok){const e=await r.text();throw new Error(e)}
@@ -274,7 +244,6 @@ async function loadMasterData(){
   }catch(e){console.error(e)}
 }
 
-// ─── TABS ─────────────────────────────────────
 function showTab(tab){
   if(currentRole==='driver'&&(tab==='drivers'||tab==='cashflow'))return;
   document.querySelectorAll('.nav-btn').forEach((b,i)=>{
@@ -288,72 +257,60 @@ function showTab(tab){
   else if(tab==='search')renderSearch();
 }
 
-// ─── DASHBOARD ────────────────────────────────
 async function renderDashboard(){
   try{
-    let bookingsQuery='bookings_view?select=*,platforms(*)&order=booking_date.desc,pickup_time.desc&limit=5';
-    let allQuery='bookings?select=*';
-    if(currentRole==='driver'){
-      bookingsQuery+=`&assigned_driver_id=eq.${currentDriverId}`;
-      allQuery+=`&assigned_driver_id=eq.${currentDriverId}`;
-    }
-    const [bookings,allBookings]=await Promise.all([api(bookingsQuery),api(allQuery)]);
-    const totalPayout=allBookings.reduce((s,b)=>s+(b.platform_payout||0),0);
-    const totalProfit=allBookings.reduce((s,b)=>s+(b.profit||0),0);
-    const totalDriverPayout=allBookings.reduce((s,b)=>s+(b.driver_payout||0),0);
+    let q='bookings?select=*,assigned_driver:drivers!bookings_assigned_driver_id_fkey(*),platforms(*)&order=booking_date.desc,pickup_time.desc&limit=5';
+    let aq='bookings?select=*';
+    if(currentRole==='driver'){q+=`&assigned_driver_id=eq.${currentDriverId}`;aq+=`&assigned_driver_id=eq.${currentDriverId}`;}
+    const [bookings,all]=await Promise.all([api(q),api(aq)]);
+    const totalPayout=all.reduce((s,b)=>s+(b.platform_payout||0),0);
+    const totalProfit=all.reduce((s,b)=>s+(b.profit_hkd||0),0);
+    const totalWage=all.reduce((s,b)=>s+(b.driver_wage_paid||0),0);
     const today=dayjs().format('YYYY-MM-DD');
-    const todayCount=allBookings.filter(b=>b.booking_date===today).length;
-
+    const todayCount=all.filter(b=>b.booking_date===today).length;
     document.getElementById('main-content').innerHTML=`
       <div class="stats-row">
-        <div class="stat-card"><div class="stat-val">${allBookings.length}</div><div class="stat-label">📋 ${currentRole==='driver'?'我嘅單':'總訂單'}</div></div>
+        <div class="stat-card"><div class="stat-val">${all.length}</div><div class="stat-label">📋 ${currentRole==='driver'?'我嘅單':'總訂單'}</div></div>
         <div class="stat-card"><div class="stat-val">${todayCount}</div><div class="stat-label">📅 今日訂單</div></div>
         ${currentRole==='admin'?`
         <div class="stat-card"><div class="stat-val">US$${totalPayout.toFixed(0)}</div><div class="stat-label">💳 總收入</div></div>
-        <div class="stat-card"><div class="stat-val profit-positive">US$${totalProfit.toFixed(0)}</div><div class="stat-label">💰 總利潤</div></div>
+        <div class="stat-card"><div class="stat-val profit-positive">HK$${totalProfit.toFixed(0)}</div><div class="stat-label">💰 總利潤</div></div>
         `:`
-        <div class="stat-card"><div class="stat-val profit-positive">US$${totalDriverPayout.toFixed(0)}</div><div class="stat-label">💰 我嘅工資</div></div>
-        <div class="stat-card"><div class="stat-val">${allBookings.filter(b=>b.status==='completed').length}</div><div class="stat-label">✅ 完成訂單</div></div>
+        <div class="stat-card"><div class="stat-val profit-positive">HK$${totalWage.toFixed(0)}</div><div class="stat-label">💰 我嘅工資</div></div>
+        <div class="stat-card"><div class="stat-val">${all.filter(b=>b.status==='completed').length}</div><div class="stat-label">✅ 完成訂單</div></div>
         `}
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <h2 style="font-size:1rem">${currentRole==='driver'?'我嘅最近訂單':'最近訂單'}</h2>
+        <h2 style="font-size:1rem">最近訂單</h2>
         <button class="btn btn-ghost btn-sm" onclick="showTab('bookings')">全部 →</button>
       </div>
       ${bookings.map(b=>bookingCard(b)).join('')}
     `;
   }catch(e){
-    document.getElementById('main-content').innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><p>${e.message}</p></div>`;
+    document.getElementById('main-content').innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><p>${e.message}</p><button class="btn btn-ghost" style="margin-top:12px" onclick="resetSetup()">重新設定</button></div>`;
   }
 }
 
-// ─── BOOKINGS ─────────────────────────────────
 async function renderBookings(filter='all'){
   try{
-    let query='bookings_view?select=*,platforms(*)&order=booking_date.desc,pickup_time.desc';
-    if(currentRole==='driver')query+=`&assigned_driver_id=eq.${currentDriverId}`;
-    const bookings=await api(query);
+    let q='bookings?select=*,assigned_driver:drivers!bookings_assigned_driver_id_fkey(*),referrer:drivers!bookings_referrer_id_fkey(*),platforms(*)&order=booking_date.desc,pickup_time.desc';
+    if(currentRole==='driver')q+=`&assigned_driver_id=eq.${currentDriverId}`;
+    const bookings=await api(q);
     const filtered=filter==='all'?bookings:filter==='vip'?bookings.filter(b=>b.vip):filter==='unassigned'?bookings.filter(b=>!b.assigned_driver_id):bookings.filter(b=>b.status===filter);
-
-    const filters=currentRole==='admin'
-      ?['all','pending','confirmed','completed','vip','unassigned']
-      :['all','confirmed','completed'];
-
+    const filters=currentRole==='admin'?['all','pending','confirmed','completed','vip','unassigned']:['all','confirmed','completed'];
     document.getElementById('main-content').innerHTML=`
       <div class="filter-row">
-        ${filters.map(f=>`
-          <button class="filter-btn ${filter===f?'active':''}" onclick="renderBookings('${f}')">
-            ${f==='all'?'全部':f==='pending'?'待確認':f==='confirmed'?'已確認':f==='completed'?'已完成':f==='vip'?'⭐ VIP':'未派司機'}
-          </button>`).join('')}
+        ${filters.map(f=>`<button class="filter-btn ${filter===f?'active':''}" onclick="renderBookings('${f}')">${f==='all'?'全部':f==='pending'?'待確認':f==='confirmed'?'已確認':f==='completed'?'已完成':f==='vip'?'⭐ VIP':'未派司機'}</button>`).join('')}
       </div>
-      <div style="color:var(--muted);font-size:.82rem;margin-bottom:12px">${filtered.length} 張單</div>
+      <div style="color:var(--muted);font-size:.78rem;margin-bottom:12px">${filtered.length} 張單</div>
       ${filtered.length?filtered.map(b=>bookingCard(b)).join(''):'<div class="empty"><div class="empty-icon">📋</div><p>冇訂單</p></div>'}
     `;
   }catch(e){document.getElementById('main-content').innerHTML=`<div class="empty"><p>錯誤：${e.message}</p></div>`}
 }
 
 function bookingCard(b){
-  const profit=b.profit||(b.platform_payout-b.driver_payout);
+  const driverName=b.assigned_driver?.name||'未派';
+  const profit=b.profit_hkd||(b.platform_payout*7.8-b.driver_wage_paid)||0;
   return `
     <div class="card ${b.vip?'vip':''}" onclick="viewBooking('${b.id}')">
       <div class="card-header">
@@ -365,34 +322,30 @@ function bookingCard(b){
         <span class="badge badge-${b.status||'pending'}">${statusLabel(b.status)}</span>
       </div>
       <div class="booking-route">
-        <div class="from" style="font-size:.82rem">${b.pickup_location||'—'}</div>
+        <div class="from">${b.pickup_location||'—'}</div>
         <div class="arrow">→</div>
-        <div class="to" style="font-size:.82rem">${b.dropoff_location||'—'}</div>
+        <div class="to">${b.dropoff_location||'—'}</div>
       </div>
       <div class="booking-info-row">
         <div class="booking-info-item">👤 <span>${b.passenger_name||'—'}</span></div>
-        <div class="booking-info-item">🚗 <span>${b.driver_name:'未派'}</span></div>
-        ${currentRole==='admin'?`<div class="booking-info-item">💳 <span>US$${b.platform_payout||0}</span></div><div class="booking-info-item profit-positive">💰 <span>+US$${profit||0}</span></div>`:`<div class="booking-info-item">💰 <span>US$${b.driver_payout||0}</span></div>`}
+        <div class="booking-info-item">🚗 <span>${driverName}</span></div>
+        ${currentRole==='admin'?`<div class="booking-info-item">💳 <span>US$${b.platform_payout||0}</span></div><div class="booking-info-item profit-positive">💰 <span>HK$${profit.toFixed?profit.toFixed(0):profit}</span></div>`:`<div class="booking-info-item">💰 <span>HK$${b.driver_wage_paid||0}</span></div>`}
       </div>
       <div class="booking-actions" onclick="event.stopPropagation()">
-        ${b.passenger_phone&&currentRole==='admin'?`
-          <button class="btn btn-sm btn-whatsapp" onclick="whatsapp('${b.passenger_phone}','${(b.passenger_name||'').replace(/'/g,"\\'")}')">WhatsApp</button>
-          <button class="btn btn-sm btn-imessage" onclick="imessage('${b.passenger_phone}')">iMessage</button>`:''}
+        ${b.passenger_phone&&currentRole==='admin'?`<button class="btn btn-sm btn-whatsapp" onclick="whatsapp('${b.passenger_phone}','${(b.passenger_name||'').replace(/'/g,"\\'")}')">WhatsApp</button><button class="btn btn-sm btn-imessage" onclick="imessage('${b.passenger_phone}')">iMessage</button>`:''}
         ${currentRole==='admin'?`<button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();editBooking('${b.id}')">編輯</button>`:''}
       </div>
     </div>`;
 }
 
-function statusLabel(s){
-  return{pending:'待確認',confirmed:'已確認',completed:'已完成',cancelled:'已取消'}[s]||'待確認';
-}
+function statusLabel(s){return{pending:'待確認',confirmed:'已確認',completed:'已完成',cancelled:'已取消'}[s]||'待確認'}
 
 async function viewBooking(id){
-  const res=await api(`bookings?id=eq.${id}&select=*,drivers(*),platforms(*)`);
+  const res=await api(`bookings?id=eq.${id}&select=*,assigned_driver:drivers!bookings_assigned_driver_id_fkey(*),referrer:drivers!bookings_referrer_id_fkey(*),platforms(*)`);
   if(!res.length)return;
   const b=res[0];
   if(currentRole==='driver'&&b.assigned_driver_id!==currentDriverId)return;
-  const profit=b.profit||(b.platform_payout-b.driver_payout);
+  const profit=b.profit_hkd||(b.platform_payout*(b.exchange_rate||7.8)-b.driver_wage_paid)||0;
   showModal(`
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div><span class="internal-code" style="font-size:1.1rem">${b.internal_code}</span>${b.vip?'<span class="badge badge-vip" style="margin-left:8px">⭐ VIP</span>':''}</div>
@@ -417,15 +370,21 @@ async function viewBooking(id){
       <div class="detail-row"><span class="detail-key">人數/行李</span><span>👤${b.pax} 🧳${b.luggage}</span></div>
     </div>
     <div class="detail-section">
-      <h3>${currentRole==='admin'?'司機 & 收入':'工資'}</h3>
-      <div class="detail-row"><span class="detail-key">司機</span><span>${b.driver_name||'未派'}</span></div>
+      <h3>${currentRole==='admin'?'司機 & 財務':'工資'}</h3>
+      <div class="detail-row"><span class="detail-key">司機</span><span>${b.assigned_driver?.name||'未派'}</span></div>
       ${currentRole==='admin'?`
       <div class="detail-row"><span class="detail-key">平台收入</span><span>US$${b.platform_payout||0}</span></div>
-      <div class="detail-row"><span class="detail-key">司機工資</span><span>US$${b.driver_payout||0}</span></div>
-      <div class="detail-row"><span class="detail-key">利潤</span><span class="${profit>=0?'profit-positive':'profit-negative'}">US$${profit||0}</span></div>
-      `:`<div class="detail-row"><span class="detail-key">我嘅工資</span><span class="profit-positive">US$${b.driver_payout||0}</span></div>`}
+      <div class="detail-row"><span class="detail-key">匯率</span><span>${b.exchange_rate||7.8}</span></div>
+      <div class="detail-row"><span class="detail-key">平台收入(HK$)</span><span>HK$${((b.platform_payout||0)*(b.exchange_rate||7.8)).toFixed(2)}</span></div>
+      <div class="detail-row"><span class="detail-key">市場工資</span><span>HK$${b.driver_wage_market||0}</span></div>
+      <div class="detail-row"><span class="detail-key">實付工資</span><span>HK$${b.driver_wage_paid||0}</span></div>
+      <div class="detail-row"><span class="detail-key">預付人</span><span>${b.wage_paid_by||'—'}</span></div>
+      <div class="detail-row"><span class="detail-key">出單人</span><span>${b.referrer?.name||'—'}</span></div>
+      <div class="detail-row"><span class="detail-key">出單人利潤</span><span>HK$${b.referrer_bonus||0}</span></div>
+      <div class="detail-row"><span class="detail-key">淨利潤</span><span class="${profit>=0?'profit-positive':'profit-negative'}">HK$${typeof profit==='number'?profit.toFixed(2):profit}</span></div>
+      `:`<div class="detail-row"><span class="detail-key">我嘅工資</span><span class="profit-positive">HK$${b.driver_wage_paid||0}</span></div>`}
     </div>
-    ${b.notes?`<div class="detail-section"><h3>備註</h3><p style="font-size:.9rem">${b.notes}</p></div>`:''}
+    ${b.notes?`<div class="detail-section"><h3>備註</h3><p style="font-size:.88rem">${b.notes}</p></div>`:''}
     ${b.passenger_phone&&currentRole==='admin'?`
     <div style="display:flex;gap:8px;margin-top:16px">
       <button class="btn btn-whatsapp" style="flex:1" onclick="whatsapp('${b.passenger_phone}','${(b.passenger_name||'').replace(/'/g,"\\'")}')">📱 WhatsApp</button>
@@ -443,9 +402,10 @@ function openNewBooking(){if(currentRole==='admin')editBooking(null)}
 async function editBooking(id){
   if(currentRole!=='admin')return;
   let b=null;
-  if(id){const r=await api(`bookings?id=eq.${id}&select=*`);b=r[0]}
+  if(id){const r=await api(`bookings?id=eq.${id}&select=*,assigned_driver:drivers!bookings_assigned_driver_id_fkey(*),referrer:drivers!bookings_referrer_id_fkey(*)`);b=r[0]}
   const pOpts=platforms.map(p=>`<option value="${p.id}"${b?.platform_id===p.id?' selected':''}>${p.name}</option>`).join('');
   const dOpts='<option value="">未指派</option>'+drivers.map(d=>`<option value="${d.id}"${b?.assigned_driver_id===d.id?' selected':''}>${d.name} (${d.license_plate||''})</option>`).join('');
+  const rOpts='<option value="">— 冇出單人 —</option>'+drivers.map(d=>`<option value="${d.id}"${b?.referrer_id===d.id?' selected':''}>${d.name} (${d.license_plate||''})</option>`).join('');
   const sOpts=['pending','confirmed','completed','cancelled'].map(s=>`<option value="${s}"${(b?.status||'pending')===s?' selected':''}>${statusLabel(s)}</option>`).join('');
   showModal(`
     <div class="modal-title">${b?'編輯訂單':'新增訂單'}</div>
@@ -458,7 +418,7 @@ async function editBooking(id){
       <div class="form-group"><label>平台單號</label><input type="text" id="f-ref" value="${b?.booking_ref||''}"></div>
     </div>
     <div class="form-group"><label>車型</label>
-      <select id="f-vehicle">${['Economy+','Economy MPV','Economy VAN','Business Sedan'].map(v=>`<option${b?.vehicle_type===v?' selected':''}>${v}</option>`).join('')}</select>
+      <select id="f-vehicle">${['Economy+','Economy MPV','Economy VAN','Business Sedan','Business MPV'].map(v=>`<option${b?.vehicle_type===v?' selected':''}>${v}</option>`).join('')}</select>
     </div>
     <div class="form-group"><label>上車地點</label><input type="text" id="f-pickup" value="${b?.pickup_location||''}"></div>
     <div class="form-group"><label>落車地點</label><input type="text" id="f-dropoff" value="${b?.dropoff_location||''}"></div>
@@ -473,10 +433,42 @@ async function editBooking(id){
     </div>
     <div class="form-group"><label>派司機</label><select id="f-driver">${dOpts}</select></div>
     <div class="form-row">
-      <div class="form-group"><label>平台 Payout (US$)</label><input type="number" id="f-payout" step="0.01" value="${b?.platform_payout||''}"></div>
+      <div class="form-group"><label>平台 Payout (US$)</label><input type="number" id="f-payout" step="0.01" value="${b?.platform_payout||''}" oninput="updateProfitCalc()"></div>
       <div class="form-group"><label>平台 Gross (US$)</label><input type="number" id="f-gross" step="0.01" value="${b?.platform_gross||''}"></div>
     </div>
-    <div class="form-group"><label>司機工資 (US$)</label><input type="number" id="f-dpayout" step="0.01" value="${b?.driver_payout||''}"></div>
+    <div class="form-group"><label>司機工資 (US$) — 平台記錄用</label><input type="number" id="f-dpayout" step="0.01" value="${b?.driver_payout||''}"></div>
+    <div class="finance-box">
+      <div class="finance-box-title">💱 實際財務記錄（港幣）</div>
+      <div class="form-row">
+        <div class="form-group"><label>匯率 USD/HKD</label><input type="number" id="f-rate" step="0.01" value="${b?.exchange_rate||7.8}" oninput="updateProfitCalc()"></div>
+        <div class="form-group"><label>平台收入（港幣）</label><input type="text" id="f-payout-hkd" readonly style="color:var(--gold);font-weight:600" placeholder="自動計算"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>市場司機工資 HK$</label><input type="number" id="f-wage-market" step="1" value="${b?.driver_wage_market||''}" oninput="updateProfitCalc()"></div>
+        <div class="form-group"><label>實付司機工資 HK$</label><input type="number" id="f-wage-paid" step="1" value="${b?.driver_wage_paid||''}" oninput="updateProfitCalc()"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>預付人</label>
+          <select id="f-wage-paidby">
+            <option value="">— 選擇 —</option>
+            <option value="Dennis"${b?.wage_paid_by==='Dennis'?' selected':''}>Dennis</option>
+            <option value="Partner"${b?.wage_paid_by==='Partner'?' selected':''}>Partner</option>
+          </select>
+        </div>
+        <div class="form-group"><label>付款方式</label>
+          <select id="f-wage-method">${['cash','PayMe','FPS','bank transfer'].map(m=>`<option${(b?.wage_paid_method||'cash')===m?' selected':''}>${m}</option>`).join('')}</select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>出單人</label><select id="f-referrer">${rOpts}</select></div>
+        <div class="form-group"><label>出單人利潤 HK$</label><input type="text" id="f-referrer-bonus" readonly style="color:#2ecc71;font-weight:600" placeholder="自動計算"></div>
+      </div>
+      <div class="profit-box">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">💰 預計淨利潤</div>
+        <div id="f-profit-display" style="font-size:1.2rem;font-weight:700;color:#2ecc71">HK$—</div>
+        <div id="f-profit-breakdown" style="font-size:.72rem;color:var(--muted);margin-top:4px"></div>
+      </div>
+    </div>
     <div class="form-row">
       <div class="form-group"><label>狀態</label><select id="f-status">${sOpts}</select></div>
       <div class="form-group" style="display:flex;align-items:flex-end;padding-bottom:2px">
@@ -487,35 +479,11 @@ async function editBooking(id){
     </div>
     <div class="form-group"><label>備註</label><textarea id="f-notes">${b?.notes||''}</textarea></div>
     <div style="display:flex;gap:8px;margin-top:8px">
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px">
-<div style="font-size:.82rem;color:var(--gold);font-weight:700;margin-bottom:12px">💱 實際財務記錄（港幣）</div>
-<div class="form-row">
-<div class="form-group"><label>匯率 USD/HKD</label><input type="number" id="f-rate" step="0.01" value="${b?.exchange_rate||7.8}" oninput="updateProfitCalc()"></div>
-<div class="form-group"><label>平台收入（港幣）</label><input type="text" id="f-payout-hkd" readonly style="color:var(--gold);font-weight:600" placeholder="自動計算"></div>
-</div>
-<div class="form-row">
-<div class="form-group"><label>市場司機工資 HK$</label><input type="number" id="f-wage-market" step="1" value="${b?.driver_wage_market||''}" oninput="updateProfitCalc()"></div>
-<div class="form-group"><label>實付司機工資 HK$</label><input type="number" id="f-wage-paid" step="1" value="${b?.driver_wage_paid||''}" oninput="updateProfitCalc()"></div>
-</div>
-<div class="form-row">
-<div class="form-group"><label>預付人</label><select id="f-wage-paidby"><option value="">— 選擇 —</option><option value="Dennis" ${b?.wage_paid_by==='Dennis'?'selected':''}>Dennis</option><option value="Partner" ${b?.wage_paid_by==='Partner'?'selected':''}>Partner</option></select></div>
-<div class="form-group"><label>付款方式</label><select id="f-wage-method">${['cash','PayMe','FPS','bank transfer'].map(m=>`<option ${(b?.wage_paid_method||'cash')===m?'selected':''}>${m}</option>`).join('')}</select></div>
-</div>
-<div class="form-row">
-<div class="form-group"><label>出單人</label><select id="f-referrer"><option value="">— 冇出單人 —</option>${drivers.map(d=>`<option value="${d.id}" ${b?.referrer_id===d.id?'selected':''}>${d.name} (${d.license_plate||''})</option>`).join('')}</select></div>
-<div class="form-group"><label>出單人利潤 HK$</label><input type="text" id="f-referrer-bonus" readonly style="color:#2ecc71;font-weight:600" placeholder="自動計算"></div>
-</div>
-<div style="background:var(--card);border-radius:8px;padding:12px;margin-top:4px">
-<div style="font-size:.82rem;color:var(--muted);margin-bottom:6px">💰 預計利潤</div>
-<div id="f-profit-display" style="font-size:1.2rem;font-weight:700;color:#2ecc71">HK$—</div>
-<div id="f-profit-breakdown" style="font-size:.75rem;color:var(--muted);margin-top:4px"></div>
-</div>
-</div>
-
       <button class="btn btn-primary" style="flex:1" onclick="saveBooking('${b?.id||''}')">💾 儲存</button>
       <button class="btn btn-ghost" onclick="closeModal()">取消</button>
     </div>
   `);
+  setTimeout(()=>updateProfitCalc(),100);
 }
 
 async function saveBooking(id){
@@ -536,17 +504,16 @@ async function saveBooking(id){
     platform_payout:parseFloat(document.getElementById('f-payout').value)||0,
     platform_gross:parseFloat(document.getElementById('f-gross').value)||0,
     driver_payout:parseFloat(document.getElementById('f-dpayout').value)||0,
+    exchange_rate:parseFloat(document.getElementById('f-rate').value)||7.8,
+    driver_wage_market:parseFloat(document.getElementById('f-wage-market').value)||0,
+    driver_wage_paid:parseFloat(document.getElementById('f-wage-paid').value)||0,
+    wage_paid_by:document.getElementById('f-wage-paidby').value||null,
+    wage_paid_method:document.getElementById('f-wage-method').value||'cash',
+    referrer_id:document.getElementById('f-referrer').value||null,
+    referrer_bonus:Math.max(0,(parseFloat(document.getElementById('f-wage-paid').value)||0)-(parseFloat(document.getElementById('f-wage-market').value)||0)),
     status:document.getElementById('f-status').value,
     vip:document.getElementById('f-vip').checked,
     notes:document.getElementById('f-notes').value||null,
-    exchange_rate:parseFloat(document.getElementById('f-rate')?.value)||7.8,
-driver_wage_market:parseFloat(document.getElementById('f-wage-market')?.value)||0,
-driver_wage_paid:parseFloat(document.getElementById('f-wage-paid')?.value)||0,
-wage_paid_by:document.getElementById('f-wage-paidby')?.value||null,
-wage_paid_method:document.getElementById('f-wage-method')?.value||'cash',
-referrer_id:document.getElementById('f-referrer')?.value||null,
-referrer_bonus:Math.max(0,(parseFloat(document.getElementById('f-wage-paid')?.value)||0)-(parseFloat(document.getElementById('f-wage-market')?.value)||0)),
-
   };
   try{
     if(id)await api(`bookings?id=eq.${id}`,'PATCH',data);
@@ -554,7 +521,6 @@ referrer_bonus:Math.max(0,(parseFloat(document.getElementById('f-wage-paid')?.va
     closeModal();renderBookings();
   }catch(e){alert('儲存失敗：'+e.message)}
 }
-
 async function renderDrivers(){
   if(currentRole!=='admin')return;
   try{
@@ -566,12 +532,12 @@ async function renderDrivers(){
       </div>
       ${list.length?list.map(d=>`
         <div class="card" onclick="viewDriver('${d.id}')">
-          <div class="driver-card">
+          <div class="driver-card-row">
             <div class="driver-avatar">${d.name.charAt(0)}</div>
             <div style="flex:1">
               <div style="font-weight:600">${d.name} ${d.is_lead_driver?'<span class="tag-lead">單主</span>':''}</div>
-              <div style="color:var(--muted);font-size:.82rem">${d.vehicle_model||''} ${d.license_plate?'· '+d.license_plate:''}</div>
-              <div style="color:var(--muted);font-size:.82rem">${d.phone||''}</div>
+              <div style="color:var(--muted);font-size:.8rem">${d.vehicle_model||''} ${d.license_plate?'· '+d.license_plate:''}</div>
+              <div style="color:var(--muted);font-size:.8rem">${d.phone||''}</div>
             </div>
             <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();editDriver('${d.id}')">編輯</button>
           </div>
@@ -584,7 +550,7 @@ async function viewDriver(id){
   if(currentRole!=='admin')return;
   const d=(await api(`drivers?id=eq.${id}&select=*`))[0];
   const dBookings=await api(`bookings?assigned_driver_id=eq.${id}&select=*&order=booking_date.desc&limit=5`);
-  const total=dBookings.reduce((s,b)=>s+(b.driver_payout||0),0);
+  const total=dBookings.reduce((s,b)=>s+(b.driver_wage_paid||0),0);
   showModal(`
     <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
       <div class="driver-avatar" style="width:56px;height:56px;font-size:1.4rem">${d.name.charAt(0)}</div>
@@ -599,7 +565,7 @@ async function viewDriver(id){
     <div class="detail-section">
       <h3>工作記錄</h3>
       <div class="detail-row"><span class="detail-key">完成訂單</span><span>${dBookings.length} 張</span></div>
-      <div class="detail-row"><span class="detail-key">總工資</span><span class="profit-positive">US$${total.toFixed(2)}</span></div>
+      <div class="detail-row"><span class="detail-key">總工資</span><span class="profit-positive">HK$${total.toFixed(2)}</span></div>
     </div>
     ${d.phone?`<div style="margin-top:16px"><button class="btn btn-whatsapp" style="width:100%" onclick="whatsappDriver('${d.phone}')">📱 WhatsApp 司機</button></div>`:''}
     <button class="btn btn-ghost" style="width:100%;margin-top:10px" onclick="closeModal()">關閉</button>
@@ -653,8 +619,8 @@ async function renderCashflow(){
     document.getElementById('main-content').innerHTML=`
       <div class="stats-row" style="grid-template-columns:1fr 1fr 1fr">
         <div class="stat-card"><div class="stat-val profit-positive">US$${totalIn.toFixed(0)}</div><div class="stat-label">💳 總收入</div></div>
-        <div class="stat-card"><div class="stat-val profit-negative">US$${totalOut.toFixed(0)}</div><div class="stat-label">💸 總支出</div></div>
-        <div class="stat-card"><div class="stat-val">US$${(totalIn-totalOut).toFixed(0)}</div><div class="stat-label">💰 淨利</div></div>
+        <div class="stat-card"><div class="stat-val profit-negative">HK$${totalOut.toFixed(0)}</div><div class="stat-label">💸 總支出</div></div>
+        <div class="stat-card"><div class="stat-val">HK$${(totalIn*7.8-totalOut).toFixed(0)}</div><div class="stat-label">💰 淨利</div></div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
         <h2 style="font-size:1rem">現金流記錄</h2>
@@ -667,9 +633,9 @@ async function renderCashflow(){
               <div style="font-weight:600">${c.type==='income'?'💳 收入':'💸 支出'} · ${c.payment_method}</div>
               <div class="card-meta">${c.bookings?.internal_code||''} ${c.bookings?.passenger_name||''} · ${c.paid_by||''} → ${c.paid_to||''}</div>
             </div>
-            <div class="${c.type==='income'?'profit-positive':'profit-negative'}" style="font-size:1.1rem;font-weight:700">${c.type==='income'?'+':'-'}US$${c.amount}</div>
+            <div class="${c.type==='income'?'profit-positive':'profit-negative'}" style="font-size:1.1rem;font-weight:700">${c.type==='income'?'+':'-'}$${c.amount}</div>
           </div>
-          ${c.notes?`<div style="color:var(--muted);font-size:.82rem">${c.notes}</div>`:''}
+          ${c.notes?`<div style="color:var(--muted);font-size:.8rem">${c.notes}</div>`:''}
         </div>`).join(''):'<div class="empty"><div class="empty-icon">💰</div><p>未有現金流記錄</p></div>'}
     `;
   }catch(e){document.getElementById('main-content').innerHTML=`<div class="empty"><p>錯誤：${e.message}</p></div>`}
@@ -683,7 +649,7 @@ async function addCashflow(){
     <div class="form-group"><label>類型</label>
       <select id="cf-type"><option value="income">💳 收入</option><option value="expense">💸 支出</option></select>
     </div>
-    <div class="form-group"><label>金額 (US$)</label><input type="number" id="cf-amount" step="0.01"></div>
+    <div class="form-group"><label>金額</label><input type="number" id="cf-amount" step="0.01"></div>
     <div class="form-group"><label>關聯訂單</label><select id="cf-booking">${bOpts}</select></div>
     <div class="form-row">
       <div class="form-group"><label>付款人</label><input type="text" id="cf-from" placeholder="客人/平台"></div>
@@ -731,35 +697,16 @@ async function doSearch(){
   const res=document.getElementById('search-results');
   res.innerHTML='<div class="loading">搜尋中...</div>';
   try{
-    let query=`bookings_view?select=*,platforms(*)&or=(internal_code.ilike.*${encodeURIComponent(q)}*,passenger_name.ilike.*${encodeURIComponent(q)}*,passenger_phone.ilike.*${encodeURIComponent(q)}*,booking_ref.ilike.*${encodeURIComponent(q)}*,pickup_location.ilike.*${encodeURIComponent(q)}*,dropoff_location.ilike.*${encodeURIComponent(q)}*)&order=booking_date.desc`;
+    let query=`bookings?select=*,assigned_driver:drivers!bookings_assigned_driver_id_fkey(*),platforms(*)&or=(internal_code.ilike.*${encodeURIComponent(q)}*,passenger_name.ilike.*${encodeURIComponent(q)}*,passenger_phone.ilike.*${encodeURIComponent(q)}*,booking_ref.ilike.*${encodeURIComponent(q)}*,pickup_location.ilike.*${encodeURIComponent(q)}*,dropoff_location.ilike.*${encodeURIComponent(q)}*)&order=booking_date.desc`;
     if(currentRole==='driver')query+=`&assigned_driver_id=eq.${currentDriverId}`;
     const results=await api(query);
     res.innerHTML=results.length?
-      `<div style="color:var(--muted);font-size:.82rem;margin-bottom:12px">找到 ${results.length} 張單</div>`+results.map(b=>bookingCard(b)).join(''):
+      `<div style="color:var(--muted);font-size:.78rem;margin-bottom:12px">找到 ${results.length} 張單</div>`+results.map(b=>bookingCard(b)).join(''):
       '<div class="empty"><div class="empty-icon">🔍</div><p>冇結果</p></div>';
   }catch(e){res.innerHTML=`<div class="empty"><p>錯誤：${e.message}</p></div>`}
 }
 
-function whatsapp(phone,name){
-  const clean=phone.replace(/[^0-9+]/g,'');
-  const msg=encodeURIComponent(`你好 ${name}，\n\n我哋係 StarPower HKG，請問你嘅行程：\n• 幾多人同行？\n• 有幾多件行李？\n• 有冇特別要求？\n\n多謝！`);
-  window.open(`https://wa.me/${clean}?text=${msg}`,'_blank');
-}
-
-function whatsappDriver(phone){
-  window.open(`https://wa.me/${phone.replace(/[^0-9+]/g,'')}`, '_blank');
-}
-
-function imessage(phone){
-  window.open(`sms:${phone.replace(/[^0-9+]/g,'')}`, '_blank');
-}
-
-function showModal(html){
-  document.getElementById('modal-content').innerHTML=html;
-  document.getElementById('modal-overlay').style.display='flex';
-}
-
-  function updateProfitCalc(){
+function updateProfitCalc(){
   const payout=parseFloat(document.getElementById('f-payout')?.value)||0;
   const rate=parseFloat(document.getElementById('f-rate')?.value)||7.8;
   const wageMarket=parseFloat(document.getElementById('f-wage-market')?.value)||0;
@@ -773,23 +720,20 @@ function showModal(html){
   const breakdownEl=document.getElementById('f-profit-breakdown');
   if(hkdEl)hkdEl.value=`HK$${payoutHKD}`;
   if(bonusEl)bonusEl.value=`HK$${referrerBonus}`;
-  if(profitEl){
-    profitEl.textContent=`HK$${profit}`;
-    profitEl.style.color=parseFloat(profit)>=0?'#2ecc71':'#e94560';
-  }
+  if(profitEl){profitEl.textContent=`HK$${profit}`;profitEl.style.color=parseFloat(profit)>=0?'#2ecc71':'#e94560';}
   if(breakdownEl)breakdownEl.textContent=`HK$${payoutHKD} - HK$${wagePaid} = HK$${profit}`;
 }
 
-function closeModal(e){
-  if(!e||e.target===document.getElementById('modal-overlay'))
-    document.getElementById('modal-overlay').style.display='none';
+function whatsapp(phone,name){
+  const clean=phone.replace(/[^0-9+]/g,'');
+  const msg=encodeURIComponent(`你好 ${name}，\n\n我哋係 StarPower HKG，請問你嘅行程：\n• 幾多人同行？\n• 有幾多件行李？\n• 有冇特別要求？\n\n多謝！`);
+  window.open(`https://wa.me/${clean}?text=${msg}`,'_blank');
 }
-
-function resetSetup(){
-  localStorage.removeItem('sp_url');
-  localStorage.removeItem('sp_key');
-  location.reload();
-}
+function whatsappDriver(phone){window.open(`https://wa.me/${phone.replace(/[^0-9+]/g,'')}`, '_blank');}
+function imessage(phone){window.open(`sms:${phone.replace(/[^0-9+]/g,'')}`, '_blank');}
+function showModal(html){document.getElementById('modal-content').innerHTML=html;document.getElementById('modal-overlay').style.display='flex';}
+function closeModal(e){if(!e||e.target===document.getElementById('modal-overlay'))document.getElementById('modal-overlay').style.display='none';}
+function resetSetup(){localStorage.removeItem('sp_url');localStorage.removeItem('sp_key');location.reload();}
 </script>
 </body>
 </html>
