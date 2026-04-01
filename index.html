@@ -6,29 +6,39 @@
 <title>StarPower HKG · 車隊管理</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
 <style>
-:root{--primary:#1a1a2e;--accent:#e94560;--gold:#f5a623;--success:#27ae60;--bg:#0f0f1a;--card:#1e1e30;--border:#2d2d45;--text:#e0e0f0;--muted:#8888aa;--vip:#f5a623}
+:root{--primary:#1a1a2e;--accent:#e94560;--gold:#f5a623;--success:#27ae60;--bg:#0f0f1a;--card:#1e1e30;--border:#2d2d45;--text:#e0e0f0;--muted:#8888aa}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
-#setup-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-.setup-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:480px;width:100%}
-.setup-box h1{font-size:1.8rem;margin-bottom:8px}
-.setup-box p{color:var(--muted);margin-bottom:28px;font-size:.9rem}
-.setup-box label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:6px}
-.setup-box input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:8px;font-size:.9rem;margin-bottom:16px}
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:420px;width:100%}
+.login-box h1{font-size:1.8rem;margin-bottom:6px}
+.login-box .sub{color:var(--muted);font-size:.9rem;margin-bottom:28px}
 .logo-big{font-size:2.5rem;margin-bottom:16px}
+.tab-row{display:flex;gap:4px;margin-bottom:24px;background:var(--bg);padding:4px;border-radius:8px}
+.tab-btn{flex:1;padding:8px;border:none;background:none;color:var(--muted);cursor:pointer;border-radius:6px;font-size:.85rem;font-weight:600}
+.tab-btn.active{background:var(--card);color:var(--text)}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-size:.9rem}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.error-msg{color:var(--accent);font-size:.85rem;margin-bottom:12px;display:none}
+#setup-screen{display:none;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.setup-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:480px;width:100%}
 #app{display:none;flex-direction:column;min-height:100vh}
 .topbar{background:var(--card);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
 .topbar-logo{font-weight:700;font-size:1.1rem;color:var(--gold)}
-.topbar-actions{display:flex;gap:8px}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.user-badge{font-size:.78rem;color:var(--muted);background:var(--bg);padding:4px 10px;border-radius:20px}
 .nav{background:var(--card);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;gap:4px;padding:0 12px;scrollbar-width:none;position:sticky;top:56px;z-index:99}
 .nav::-webkit-scrollbar{display:none}
 .nav-btn{padding:12px 16px;border:none;background:none;color:var(--muted);cursor:pointer;font-size:.85rem;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s}
 .nav-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
 .content{flex:1;padding:16px;max-width:1200px;margin:0 auto;width:100%}
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer}
-.card.vip{border-left:3px solid var(--vip)}
+.card.vip{border-left:3px solid var(--gold)}
 .card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-.card-title{font-weight:600;font-size:1rem}
 .card-meta{color:var(--muted);font-size:.8rem;margin-top:2px}
 .badge{display:inline-block;padding:3px 8px;border-radius:20px;font-size:.72rem;font-weight:600;text-transform:uppercase}
 .badge-vip{background:rgba(245,166,35,.15);color:var(--gold)}
@@ -49,12 +59,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .btn-sm{padding:6px 12px;font-size:.8rem}
 .btn-whatsapp{background:#25D366;color:#fff}
 .btn-imessage{background:#007AFF;color:#fff}
-.form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:5px}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-size:.9rem}
-.form-group textarea{resize:vertical;min-height:80px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.btn-danger{background:rgba(233,69,96,.15);color:var(--accent);border:1px solid var(--accent)}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:flex-end;justify-content:center;z-index:200;padding:20px}
 @media(min-width:640px){.modal-overlay{align-items:center}}
 .modal{background:var(--card);border-radius:16px 16px 0 0;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:24px}
@@ -86,14 +91,49 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-size:.8rem;white-space:nowrap}
 .filter-btn.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
 .tag-lead{background:rgba(245,166,35,.2);color:var(--gold);padding:2px 6px;border-radius:4px;font-size:.72rem}
+.driver-my-bookings{background:rgba(245,166,35,.05);border:1px solid rgba(245,166,35,.2);border-radius:12px;padding:16px;margin-bottom:12px}
 </style>
 </head>
 <body>
+<div id="login-screen">
+  <div class="login-box">
+    <div class="logo-big">⭐</div>
+    <h1>StarPower HKG</h1>
+    <div class="sub">車隊管理系統</div>
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchLoginTab('admin')">管理員</button>
+      <button class="tab-btn" onclick="switchLoginTab('driver')">司機</button>
+    </div>
+    <div id="admin-login">
+      <div class="form-group">
+        <label>用戶名</label>
+        <input type="text" id="admin-user" placeholder="starpower">
+      </div>
+      <div class="form-group">
+        <label>密碼</label>
+        <input type="password" id="admin-pass" placeholder="••••••••">
+      </div>
+    </div>
+    <div id="driver-login" style="display:none">
+      <div class="form-group">
+        <label>車牌號碼</label>
+        <input type="text" id="driver-plate" placeholder="例：LV944">
+      </div>
+      <div class="form-group">
+        <label>手機號碼（含國碼）</label>
+        <input type="text" id="driver-phone" placeholder="例：+85298034040">
+      </div>
+    </div>
+    <div class="error-msg" id="login-error">用戶名或密碼錯誤</div>
+    <button class="btn btn-gold" style="width:100%;padding:14px;margin-top:8px" onclick="doLogin()">登入 →</button>
+  </div>
+</div>
+
 <div id="setup-screen">
   <div class="setup-box">
-    <div class="logo-big">🚗</div>
-    <h1>StarPower HKG</h1>
-    <p>車隊管理系統 · 請輸入你嘅 Supabase 設定</p>
+    <div class="logo-big">🔧</div>
+    <h1>首次設定</h1>
+    <p style="color:var(--muted);margin-bottom:24px;font-size:.9rem">請輸入 Supabase 連接資料</p>
     <div class="form-group">
       <label>Supabase Project URL</label>
       <input type="text" id="setup-url" placeholder="https://xxxxxx.supabase.co">
@@ -102,38 +142,52 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <label>Supabase Anon Public Key</label>
       <input type="password" id="setup-key" placeholder="eyJhbGciOiJ...">
     </div>
-    <button class="btn btn-gold" style="width:100%;padding:14px" onclick="saveSetup()">開始使用 →</button>
-    <p style="margin-top:12px;font-size:.78rem;color:var(--muted);text-align:center">資料只存係你嘅 Supabase，安全私隱</p>
+    <button class="btn btn-gold" style="width:100%;padding:14px" onclick="saveSetup()">儲存設定 →</button>
   </div>
 </div>
+
 <div id="app">
   <div class="topbar">
     <div class="topbar-logo">⭐ StarPower HKG</div>
-    <div class="topbar-actions">
-      <button class="btn btn-sm btn-ghost" onclick="showTab('search')">🔍</button>
-      <button class="btn btn-sm btn-primary" onclick="openNewBooking()">+ 新單</button>
+    <div class="topbar-right">
+      <span class="user-badge" id="user-badge"></span>
+      <button class="btn btn-sm btn-ghost" onclick="showTab('search')" id="search-btn">🔍</button>
+      <button class="btn btn-sm btn-primary" onclick="openNewBooking()" id="new-booking-btn">+ 新單</button>
+      <button class="btn btn-sm btn-ghost" onclick="doLogout()">登出</button>
     </div>
   </div>
-  <div class="nav">
+  <div class="nav" id="main-nav">
     <button class="nav-btn active" onclick="showTab('dashboard')">📊 總覽</button>
     <button class="nav-btn" onclick="showTab('bookings')">📋 訂單</button>
-    <button class="nav-btn" onclick="showTab('drivers')">👤 司機</button>
-    <button class="nav-btn" onclick="showTab('cashflow')">💰 現金流</button>
+    <button class="nav-btn admin-only" onclick="showTab('drivers')">👤 司機</button>
+    <button class="nav-btn admin-only" onclick="showTab('cashflow')">💰 現金流</button>
     <button class="nav-btn" onclick="showTab('search')">🔍 搜尋</button>
   </div>
   <div class="content" id="main-content"></div>
 </div>
+
 <div id="modal-overlay" class="modal-overlay" style="display:none" onclick="closeModal(event)">
   <div class="modal" id="modal-content" onclick="event.stopPropagation()"></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
 <script>
+// ─── CONFIG ───────────────────────────────────
 let SUPABASE_URL=localStorage.getItem('sp_url')||'';
 let SUPABASE_KEY=localStorage.getItem('sp_key')||'';
+let currentUser=null;
+let currentRole=null;
+let currentDriverId=null;
 let platforms=[],drivers=[];
 
+const ADMIN_USERS=[{user:'starpower',pass:'YX577lv944'}];
+
+// ─── INIT ─────────────────────────────────────
 window.onload=()=>{
-  if(SUPABASE_URL&&SUPABASE_KEY){launchApp()}
+  if(!SUPABASE_URL||!SUPABASE_KEY){
+    document.getElementById('setup-screen').style.display='flex';
+  } else {
+    document.getElementById('login-screen').style.display='flex';
+  }
 };
 
 function saveSetup(){
@@ -143,14 +197,66 @@ function saveSetup(){
   SUPABASE_URL=url;SUPABASE_KEY=key;
   localStorage.setItem('sp_url',url);
   localStorage.setItem('sp_key',key);
-  launchApp();
+  document.getElementById('setup-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+}
+
+function switchLoginTab(tab){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['admin','driver'][i]===tab));
+  document.getElementById('admin-login').style.display=tab==='admin'?'block':'none';
+  document.getElementById('driver-login').style.display=tab==='driver'?'block':'none';
+}
+
+async function doLogin(){
+  const err=document.getElementById('login-error');
+  err.style.display='none';
+  const adminTab=document.getElementById('admin-login').style.display!=='none';
+
+  if(adminTab){
+    const user=document.getElementById('admin-user').value.trim();
+    const pass=document.getElementById('admin-pass').value;
+    const match=ADMIN_USERS.find(a=>a.user===user&&a.pass===pass);
+    if(!match){err.style.display='block';return;}
+    currentUser=user;currentRole='admin';currentDriverId=null;
+    await launchApp();
+  } else {
+    const plate=document.getElementById('driver-plate').value.trim().toUpperCase();
+    const phone=document.getElementById('driver-phone').value.trim();
+    if(!plate||!phone){err.textContent='請填寫車牌同電話';err.style.display='block';return;}
+    try{
+      await apiInit();
+      const res=await api(`drivers?license_plate=eq.${encodeURIComponent(plate)}&phone=eq.${encodeURIComponent(phone)}&select=*`);
+      if(!res.length){err.textContent='車牌或電話唔啱，請重試';err.style.display='block';return;}
+      currentUser=res[0].name;currentRole='driver';currentDriverId=res[0].id;
+      await launchApp();
+    }catch(e){err.textContent='登入失敗：'+e.message;err.style.display='block';}
+  }
 }
 
 async function launchApp(){
-  document.getElementById('setup-screen').style.display='none';
+  document.getElementById('login-screen').style.display='none';
   document.getElementById('app').style.display='flex';
+  document.getElementById('user-badge').textContent=currentRole==='admin'?'👑 '+currentUser:'🚗 '+currentUser;
+  document.getElementById('new-booking-btn').style.display=currentRole==='admin'?'':'none';
+  document.querySelectorAll('.admin-only').forEach(el=>el.style.display=currentRole==='admin'?'':'none');
+  await apiInit();
   await loadMasterData();
   showTab('dashboard');
+}
+
+function doLogout(){
+  currentUser=null;currentRole=null;currentDriverId=null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('admin-user').value='';
+  document.getElementById('admin-pass').value='';
+  document.getElementById('driver-plate').value='';
+  document.getElementById('driver-phone').value='';
+}
+
+// ─── API ──────────────────────────────────────
+async function apiInit(){
+  if(!SUPABASE_URL||!SUPABASE_KEY)throw new Error('未設定 Supabase');
 }
 
 async function api(path,method='GET',body=null){
@@ -168,12 +274,13 @@ async function loadMasterData(){
   }catch(e){console.error(e)}
 }
 
+// ─── TABS ─────────────────────────────────────
 function showTab(tab){
+  if(currentRole==='driver'&&(tab==='drivers'||tab==='cashflow'))return;
   document.querySelectorAll('.nav-btn').forEach((b,i)=>{
     b.classList.toggle('active',['dashboard','bookings','drivers','cashflow','search'][i]===tab);
   });
-  const c=document.getElementById('main-content');
-  c.innerHTML='<div class="loading">載入中...</div>';
+  document.getElementById('main-content').innerHTML='<div class="loading">載入中...</div>';
   if(tab==='dashboard')renderDashboard();
   else if(tab==='bookings')renderBookings();
   else if(tab==='drivers')renderDrivers();
@@ -181,41 +288,60 @@ function showTab(tab){
   else if(tab==='search')renderSearch();
 }
 
+// ─── DASHBOARD ────────────────────────────────
 async function renderDashboard(){
   try{
-    const [bookings,allBookings]=await Promise.all([
-      api('bookings?select=*,drivers(*),platforms(*)&order=booking_date.desc,pickup_time.desc&limit=5'),
-      api('bookings?select=*')
-    ]);
+    let bookingsQuery='bookings?select=*,drivers(*),platforms(*)&order=booking_date.desc,pickup_time.desc&limit=5';
+    let allQuery='bookings?select=*';
+    if(currentRole==='driver'){
+      bookingsQuery+=`&assigned_driver_id=eq.${currentDriverId}`;
+      allQuery+=`&assigned_driver_id=eq.${currentDriverId}`;
+    }
+    const [bookings,allBookings]=await Promise.all([api(bookingsQuery),api(allQuery)]);
     const totalPayout=allBookings.reduce((s,b)=>s+(b.platform_payout||0),0);
     const totalProfit=allBookings.reduce((s,b)=>s+(b.profit||0),0);
+    const totalDriverPayout=allBookings.reduce((s,b)=>s+(b.driver_payout||0),0);
     const today=dayjs().format('YYYY-MM-DD');
     const todayCount=allBookings.filter(b=>b.booking_date===today).length;
+
     document.getElementById('main-content').innerHTML=`
       <div class="stats-row">
-        <div class="stat-card"><div class="stat-val">${allBookings.length}</div><div class="stat-label">📋 總訂單</div></div>
+        <div class="stat-card"><div class="stat-val">${allBookings.length}</div><div class="stat-label">📋 ${currentRole==='driver'?'我嘅單':'總訂單'}</div></div>
         <div class="stat-card"><div class="stat-val">${todayCount}</div><div class="stat-label">📅 今日訂單</div></div>
+        ${currentRole==='admin'?`
         <div class="stat-card"><div class="stat-val">US$${totalPayout.toFixed(0)}</div><div class="stat-label">💳 總收入</div></div>
         <div class="stat-card"><div class="stat-val profit-positive">US$${totalProfit.toFixed(0)}</div><div class="stat-label">💰 總利潤</div></div>
+        `:`
+        <div class="stat-card"><div class="stat-val profit-positive">US$${totalDriverPayout.toFixed(0)}</div><div class="stat-label">💰 我嘅工資</div></div>
+        <div class="stat-card"><div class="stat-val">${allBookings.filter(b=>b.status==='completed').length}</div><div class="stat-label">✅ 完成訂單</div></div>
+        `}
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <h2 style="font-size:1rem">最近訂單</h2>
+        <h2 style="font-size:1rem">${currentRole==='driver'?'我嘅最近訂單':'最近訂單'}</h2>
         <button class="btn btn-ghost btn-sm" onclick="showTab('bookings')">全部 →</button>
       </div>
       ${bookings.map(b=>bookingCard(b)).join('')}
     `;
   }catch(e){
-    document.getElementById('main-content').innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><p>連接失敗：${e.message}</p><button class="btn btn-ghost" style="margin-top:12px" onclick="resetSetup()">重新設定</button></div>`;
+    document.getElementById('main-content').innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><p>${e.message}</p></div>`;
   }
 }
 
+// ─── BOOKINGS ─────────────────────────────────
 async function renderBookings(filter='all'){
   try{
-    const bookings=await api('bookings?select=*,drivers(*),platforms(*)&order=booking_date.desc,pickup_time.desc');
+    let query='bookings?select=*,drivers(*),platforms(*)&order=booking_date.desc,pickup_time.desc';
+    if(currentRole==='driver')query+=`&assigned_driver_id=eq.${currentDriverId}`;
+    const bookings=await api(query);
     const filtered=filter==='all'?bookings:filter==='vip'?bookings.filter(b=>b.vip):filter==='unassigned'?bookings.filter(b=>!b.assigned_driver_id):bookings.filter(b=>b.status===filter);
+
+    const filters=currentRole==='admin'
+      ?['all','pending','confirmed','completed','vip','unassigned']
+      :['all','confirmed','completed'];
+
     document.getElementById('main-content').innerHTML=`
       <div class="filter-row">
-        ${['all','pending','confirmed','completed','vip','unassigned'].map(f=>`
+        ${filters.map(f=>`
           <button class="filter-btn ${filter===f?'active':''}" onclick="renderBookings('${f}')">
             ${f==='all'?'全部':f==='pending'?'待確認':f==='confirmed'?'已確認':f==='completed'?'已完成':f==='vip'?'⭐ VIP':'未派司機'}
           </button>`).join('')}
@@ -246,26 +372,26 @@ function bookingCard(b){
       <div class="booking-info-row">
         <div class="booking-info-item">👤 <span>${b.passenger_name||'—'}</span></div>
         <div class="booking-info-item">🚗 <span>${b.drivers?b.drivers.name:'未派'}</span></div>
-        <div class="booking-info-item">💳 <span>US$${b.platform_payout||0}</span></div>
-        <div class="booking-info-item profit-positive">💰 <span>+US$${profit||0}</span></div>
+        ${currentRole==='admin'?`<div class="booking-info-item">💳 <span>US$${b.platform_payout||0}</span></div><div class="booking-info-item profit-positive">💰 <span>+US$${profit||0}</span></div>`:`<div class="booking-info-item">💰 <span>US$${b.driver_payout||0}</span></div>`}
       </div>
       <div class="booking-actions" onclick="event.stopPropagation()">
-        ${b.passenger_phone?`
+        ${b.passenger_phone&&currentRole==='admin'?`
           <button class="btn btn-sm btn-whatsapp" onclick="whatsapp('${b.passenger_phone}','${(b.passenger_name||'').replace(/'/g,"\\'")}')">WhatsApp</button>
           <button class="btn btn-sm btn-imessage" onclick="imessage('${b.passenger_phone}')">iMessage</button>`:''}
-        <button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();editBooking('${b.id}')">編輯</button>
+        ${currentRole==='admin'?`<button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();editBooking('${b.id}')">編輯</button>`:''}
       </div>
     </div>`;
 }
 
 function statusLabel(s){
-  return{pending:'待確認',confirmed:'已確認',completed:'已完成',cancelled:'已取消'}[s]||s||'待確認';
+  return{pending:'待確認',confirmed:'已確認',completed:'已完成',cancelled:'已取消'}[s]||'待確認';
 }
 
 async function viewBooking(id){
   const res=await api(`bookings?id=eq.${id}&select=*,drivers(*),platforms(*)`);
   if(!res.length)return;
   const b=res[0];
+  if(currentRole==='driver'&&b.assigned_driver_id!==currentDriverId)return;
   const profit=b.profit||(b.platform_payout-b.driver_payout);
   showModal(`
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -277,8 +403,7 @@ async function viewBooking(id){
       <div class="detail-row"><span class="detail-key">日期時間</span><span>${b.booking_date||'—'} ${b.pickup_time?b.pickup_time.slice(0,5):''}</span></div>
       <div class="detail-row"><span class="detail-key">車型</span><span>${b.vehicle_type||'—'}</span></div>
       <div class="detail-row"><span class="detail-key">航班</span><span>${b.flight_number||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">平台</span><span>${b.platforms?.name||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">平台單號</span><span>${b.booking_ref||'—'}</span></div>
+      ${currentRole==='admin'?`<div class="detail-row"><span class="detail-key">平台</span><span>${b.platforms?.name||'—'}</span></div><div class="detail-row"><span class="detail-key">平台單號</span><span>${b.booking_ref||'—'}</span></div>`:''}
     </div>
     <div class="detail-section">
       <h3>路線</h3>
@@ -292,32 +417,35 @@ async function viewBooking(id){
       <div class="detail-row"><span class="detail-key">人數/行李</span><span>👤${b.pax} 🧳${b.luggage}</span></div>
     </div>
     <div class="detail-section">
-      <h3>司機 & 收入</h3>
+      <h3>${currentRole==='admin'?'司機 & 收入':'工資'}</h3>
       <div class="detail-row"><span class="detail-key">司機</span><span>${b.drivers?.name||'未派'}</span></div>
+      ${currentRole==='admin'?`
       <div class="detail-row"><span class="detail-key">平台收入</span><span>US$${b.platform_payout||0}</span></div>
       <div class="detail-row"><span class="detail-key">司機工資</span><span>US$${b.driver_payout||0}</span></div>
       <div class="detail-row"><span class="detail-key">利潤</span><span class="${profit>=0?'profit-positive':'profit-negative'}">US$${profit||0}</span></div>
+      `:`<div class="detail-row"><span class="detail-key">我嘅工資</span><span class="profit-positive">US$${b.driver_payout||0}</span></div>`}
     </div>
     ${b.notes?`<div class="detail-section"><h3>備註</h3><p style="font-size:.9rem">${b.notes}</p></div>`:''}
-    ${b.passenger_phone?`
+    ${b.passenger_phone&&currentRole==='admin'?`
     <div style="display:flex;gap:8px;margin-top:16px">
       <button class="btn btn-whatsapp" style="flex:1" onclick="whatsapp('${b.passenger_phone}','${(b.passenger_name||'').replace(/'/g,"\\'")}')">📱 WhatsApp</button>
       <button class="btn btn-imessage" style="flex:1" onclick="imessage('${b.passenger_phone}')">💬 iMessage</button>
     </div>`:''}
     <div style="display:flex;gap:8px;margin-top:10px">
-      <button class="btn btn-primary" style="flex:1" onclick="closeModal();editBooking('${b.id}')">✏️ 編輯</button>
-      <button class="btn btn-ghost" onclick="closeModal()">關閉</button>
+      ${currentRole==='admin'?`<button class="btn btn-primary" style="flex:1" onclick="closeModal();editBooking('${b.id}')">✏️ 編輯</button>`:''}
+      <button class="btn btn-ghost" ${currentRole==='admin'?'':'style="flex:1"'} onclick="closeModal()">關閉</button>
     </div>
   `);
 }
 
-function openNewBooking(){editBooking(null)}
+function openNewBooking(){if(currentRole==='admin')editBooking(null)}
 
 async function editBooking(id){
+  if(currentRole!=='admin')return;
   let b=null;
   if(id){const r=await api(`bookings?id=eq.${id}&select=*`);b=r[0]}
   const pOpts=platforms.map(p=>`<option value="${p.id}"${b?.platform_id===p.id?' selected':''}>${p.name}</option>`).join('');
-  const dOpts='<option value="">未指派</option>'+drivers.map(d=>`<option value="${d.id}"${b?.assigned_driver_id===d.id?' selected':''}>${d.name}</option>`).join('');
+  const dOpts='<option value="">未指派</option>'+drivers.map(d=>`<option value="${d.id}"${b?.assigned_driver_id===d.id?' selected':''}>${d.name} (${d.license_plate||''})</option>`).join('');
   const sOpts=['pending','confirmed','completed','cancelled'].map(s=>`<option value="${s}"${(b?.status||'pending')===s?' selected':''}>${statusLabel(s)}</option>`).join('');
   showModal(`
     <div class="modal-title">${b?'編輯訂單':'新增訂單'}</div>
@@ -337,7 +465,7 @@ async function editBooking(id){
     <div class="form-group"><label>航班號</label><input type="text" id="f-flight" value="${b?.flight_number||''}"></div>
     <div class="form-row">
       <div class="form-group"><label>客人姓名</label><input type="text" id="f-pname" value="${b?.passenger_name||''}"></div>
-      <div class="form-group"><label>客人電話（含國碼）</label><input type="text" id="f-pphone" value="${b?.passenger_phone||''}"></div>
+      <div class="form-group"><label>客人電話</label><input type="text" id="f-pphone" value="${b?.passenger_phone||''}"></div>
     </div>
     <div class="form-row">
       <div class="form-group"><label>人數 👤</label><input type="number" id="f-pax" value="${b?.pax||1}" min="1"></div>
@@ -395,6 +523,7 @@ async function saveBooking(id){
 }
 
 async function renderDrivers(){
+  if(currentRole!=='admin')return;
   try{
     const list=await api('drivers?select=*&order=name');
     document.getElementById('main-content').innerHTML=`
@@ -419,6 +548,7 @@ async function renderDrivers(){
 }
 
 async function viewDriver(id){
+  if(currentRole!=='admin')return;
   const d=(await api(`drivers?id=eq.${id}&select=*`))[0];
   const dBookings=await api(`bookings?assigned_driver_id=eq.${id}&select=*&order=booking_date.desc&limit=5`);
   const total=dBookings.reduce((s,b)=>s+(b.driver_payout||0),0);
@@ -428,10 +558,10 @@ async function viewDriver(id){
       <div><div style="font-size:1.2rem;font-weight:700">${d.name}</div><div style="color:var(--muted)">${d.is_lead_driver?'⭐ 單主':'司機'}</div></div>
     </div>
     <div class="detail-section">
-      <h3>聯絡資料</h3>
-      <div class="detail-row"><span class="detail-key">電話</span><span>${d.phone||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">車牌</span><span>${d.license_plate||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">車型</span><span>${d.vehicle_model||'—'}</span></div>
+      <h3>登入資料</h3>
+      <div class="detail-row"><span class="detail-key">車牌（用戶名）</span><span>${d.license_plate||'—'}</span></div>
+      <div class="detail-row"><span class="detail-key">電話（密碼）</span><span>${d.phone||'—'}</span></div>
+      <div class="detail-row"><span class="detail-key">車輛型號</span><span>${d.vehicle_model||'—'}</span></div>
     </div>
     <div class="detail-section">
       <h3>工作記錄</h3>
@@ -444,13 +574,14 @@ async function viewDriver(id){
 }
 
 async function editDriver(id){
+  if(currentRole!=='admin')return;
   let d=null;
   if(id)d=(await api(`drivers?id=eq.${id}&select=*`))[0];
   showModal(`
     <div class="modal-title">${d?'編輯司機':'新增司機'}</div>
     <div class="form-group"><label>姓名</label><input type="text" id="d-name" value="${d?.name||''}"></div>
-    <div class="form-group"><label>電話（含國碼）</label><input type="text" id="d-phone" value="${d?.phone||''}"></div>
-    <div class="form-group"><label>車牌</label><input type="text" id="d-plate" value="${d?.license_plate||''}"></div>
+    <div class="form-group"><label>電話（含國碼）— 用作司機登入密碼</label><input type="text" id="d-phone" value="${d?.phone||''}"></div>
+    <div class="form-group"><label>車牌 — 用作司機登入用戶名</label><input type="text" id="d-plate" value="${d?.license_plate||''}"></div>
     <div class="form-group"><label>車輛型號</label><input type="text" id="d-model" value="${d?.vehicle_model||''}"></div>
     <div class="form-group" style="display:flex;align-items:center;gap:8px">
       <input type="checkbox" id="d-lead"${d?.is_lead_driver?' checked':''} style="width:auto">
@@ -468,7 +599,7 @@ async function saveDriver(id){
   const data={
     name:document.getElementById('d-name').value,
     phone:document.getElementById('d-phone').value||null,
-    license_plate:document.getElementById('d-plate').value||null,
+    license_plate:document.getElementById('d-plate').value?.toUpperCase()||null,
     vehicle_model:document.getElementById('d-model').value||null,
     is_lead_driver:document.getElementById('d-lead').checked,
     notes:document.getElementById('d-notes').value||null,
@@ -481,6 +612,7 @@ async function saveDriver(id){
 }
 
 async function renderCashflow(){
+  if(currentRole!=='admin')return;
   try{
     const cf=await api('cashflow?select=*,bookings(internal_code,passenger_name)&order=created_at.desc');
     const totalIn=cf.filter(c=>c.type==='income').reduce((s,c)=>s+c.amount,0);
@@ -566,7 +698,9 @@ async function doSearch(){
   const res=document.getElementById('search-results');
   res.innerHTML='<div class="loading">搜尋中...</div>';
   try{
-    const results=await api(`bookings?select=*,drivers(*),platforms(*)&or=(internal_code.ilike.*${encodeURIComponent(q)}*,passenger_name.ilike.*${encodeURIComponent(q)}*,passenger_phone.ilike.*${encodeURIComponent(q)}*,booking_ref.ilike.*${encodeURIComponent(q)}*,pickup_location.ilike.*${encodeURIComponent(q)}*,dropoff_location.ilike.*${encodeURIComponent(q)}*)&order=booking_date.desc`);
+    let query=`bookings?select=*,drivers(*),platforms(*)&or=(internal_code.ilike.*${encodeURIComponent(q)}*,passenger_name.ilike.*${encodeURIComponent(q)}*,passenger_phone.ilike.*${encodeURIComponent(q)}*,booking_ref.ilike.*${encodeURIComponent(q)}*,pickup_location.ilike.*${encodeURIComponent(q)}*,dropoff_location.ilike.*${encodeURIComponent(q)}*)&order=booking_date.desc`;
+    if(currentRole==='driver')query+=`&assigned_driver_id=eq.${currentDriverId}`;
+    const results=await api(query);
     res.innerHTML=results.length?
       `<div style="color:var(--muted);font-size:.82rem;margin-bottom:12px">找到 ${results.length} 張單</div>`+results.map(b=>bookingCard(b)).join(''):
       '<div class="empty"><div class="empty-icon">🔍</div><p>冇結果</p></div>';
