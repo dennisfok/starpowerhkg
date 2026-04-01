@@ -487,6 +487,31 @@ async function editBooking(id){
     </div>
     <div class="form-group"><label>備註</label><textarea id="f-notes">${b?.notes||''}</textarea></div>
     <div style="display:flex;gap:8px;margin-top:8px">
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px">
+<div style="font-size:.82rem;color:var(--gold);font-weight:700;margin-bottom:12px">💱 實際財務記錄（港幣）</div>
+<div class="form-row">
+<div class="form-group"><label>匯率 USD/HKD</label><input type="number" id="f-rate" step="0.01" value="${b?.exchange_rate||7.8}" oninput="updateProfitCalc()"></div>
+<div class="form-group"><label>平台收入（港幣）</label><input type="text" id="f-payout-hkd" readonly style="color:var(--gold);font-weight:600" placeholder="自動計算"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>市場司機工資 HK$</label><input type="number" id="f-wage-market" step="1" value="${b?.driver_wage_market||''}" oninput="updateProfitCalc()"></div>
+<div class="form-group"><label>實付司機工資 HK$</label><input type="number" id="f-wage-paid" step="1" value="${b?.driver_wage_paid||''}" oninput="updateProfitCalc()"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>預付人</label><select id="f-wage-paidby"><option value="">— 選擇 —</option><option value="Dennis" ${b?.wage_paid_by==='Dennis'?'selected':''}>Dennis</option><option value="Partner" ${b?.wage_paid_by==='Partner'?'selected':''}>Partner</option></select></div>
+<div class="form-group"><label>付款方式</label><select id="f-wage-method">${['cash','PayMe','FPS','bank transfer'].map(m=>`<option ${(b?.wage_paid_method||'cash')===m?'selected':''}>${m}</option>`).join('')}</select></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>出單人</label><select id="f-referrer"><option value="">— 冇出單人 —</option>${drivers.map(d=>`<option value="${d.id}" ${b?.referrer_id===d.id?'selected':''}>${d.name} (${d.license_plate||''})</option>`).join('')}</select></div>
+<div class="form-group"><label>出單人利潤 HK$</label><input type="text" id="f-referrer-bonus" readonly style="color:#2ecc71;font-weight:600" placeholder="自動計算"></div>
+</div>
+<div style="background:var(--card);border-radius:8px;padding:12px;margin-top:4px">
+<div style="font-size:.82rem;color:var(--muted);margin-bottom:6px">💰 預計利潤</div>
+<div id="f-profit-display" style="font-size:1.2rem;font-weight:700;color:#2ecc71">HK$—</div>
+<div id="f-profit-breakdown" style="font-size:.75rem;color:var(--muted);margin-top:4px"></div>
+</div>
+</div>
+
       <button class="btn btn-primary" style="flex:1" onclick="saveBooking('${b?.id||''}')">💾 儲存</button>
       <button class="btn btn-ghost" onclick="closeModal()">取消</button>
     </div>
@@ -514,6 +539,14 @@ async function saveBooking(id){
     status:document.getElementById('f-status').value,
     vip:document.getElementById('f-vip').checked,
     notes:document.getElementById('f-notes').value||null,
+    exchange_rate:parseFloat(document.getElementById('f-rate')?.value)||7.8,
+driver_wage_market:parseFloat(document.getElementById('f-wage-market')?.value)||0,
+driver_wage_paid:parseFloat(document.getElementById('f-wage-paid')?.value)||0,
+wage_paid_by:document.getElementById('f-wage-paidby')?.value||null,
+wage_paid_method:document.getElementById('f-wage-method')?.value||'cash',
+referrer_id:document.getElementById('f-referrer')?.value||null,
+referrer_bonus:Math.max(0,(parseFloat(document.getElementById('f-wage-paid')?.value)||0)-(parseFloat(document.getElementById('f-wage-market')?.value)||0)),
+
   };
   try{
     if(id)await api(`bookings?id=eq.${id}`,'PATCH',data);
@@ -724,6 +757,27 @@ function imessage(phone){
 function showModal(html){
   document.getElementById('modal-content').innerHTML=html;
   document.getElementById('modal-overlay').style.display='flex';
+}
+
+  function updateProfitCalc(){
+  const payout=parseFloat(document.getElementById('f-payout')?.value)||0;
+  const rate=parseFloat(document.getElementById('f-rate')?.value)||7.8;
+  const wageMarket=parseFloat(document.getElementById('f-wage-market')?.value)||0;
+  const wagePaid=parseFloat(document.getElementById('f-wage-paid')?.value)||0;
+  const payoutHKD=(payout*rate).toFixed(2);
+  const referrerBonus=Math.max(0,(wagePaid-wageMarket)).toFixed(2);
+  const profit=(payout*rate-wagePaid).toFixed(2);
+  const hkdEl=document.getElementById('f-payout-hkd');
+  const bonusEl=document.getElementById('f-referrer-bonus');
+  const profitEl=document.getElementById('f-profit-display');
+  const breakdownEl=document.getElementById('f-profit-breakdown');
+  if(hkdEl)hkdEl.value=`HK$${payoutHKD}`;
+  if(bonusEl)bonusEl.value=`HK$${referrerBonus}`;
+  if(profitEl){
+    profitEl.textContent=`HK$${profit}`;
+    profitEl.style.color=parseFloat(profit)>=0?'#2ecc71':'#e94560';
+  }
+  if(breakdownEl)breakdownEl.textContent=`HK$${payoutHKD} - HK$${wagePaid} = HK$${profit}`;
 }
 
 function closeModal(e){
