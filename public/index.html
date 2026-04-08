@@ -624,7 +624,10 @@ async function renderCashflow(){
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
         <h2 style="font-size:1rem">現金流記錄</h2>
-        <button class="btn btn-primary btn-sm" onclick="addCashflow()">+ 新增</button>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-ghost btn-sm" onclick="syncCompletedToCashflow()">⟳ 同步完成單</button>
+          <button class="btn btn-primary btn-sm" onclick="addCashflow()">+ 新增</button>
+        </div>
       </div>
       ${cf.length?cf.map(c=>`
         <div class="card">
@@ -678,6 +681,33 @@ async function saveCashflow(){
   };
   try{await api('cashflow','POST',data);closeModal();renderCashflow();}
   catch(e){alert('儲存失敗：'+e.message)}
+}
+
+async function syncCompletedToCashflow(){
+  try{
+    const [completed,existing]=await Promise.all([
+      api('bookings?select=id,internal_code,passenger_name,platform_payout,booking_date&status=eq.completed&platform_payout=gt.0'),
+      api('cashflow?select=booking_id&booking_id=not.is.null')
+    ]);
+    const existingIds=new Set(existing.map(c=>c.booking_id));
+    const toSync=completed.filter(b=>!existingIds.has(b.id));
+    if(!toSync.length){alert('所有完成單已同步至現金流');return;}
+    let ok=0;
+    for(const b of toSync){
+      await api('cashflow','POST',{
+        type:'income',
+        amount:b.platform_payout,
+        booking_id:b.id,
+        paid_by:'平台',
+        paid_to:'StarPower',
+        payment_method:'platform',
+        notes:`自動同步 ${b.internal_code||''} ${b.booking_date||''}`
+      });
+      ok++;
+    }
+    alert(`成功同步 ${ok} 張完成單至現金流`);
+    renderCashflow();
+  }catch(e){alert('同步失敗：'+e.message)}
 }
 
 function renderSearch(){
