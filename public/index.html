@@ -391,7 +391,7 @@ async function viewBooking(id){
       <button class="btn btn-imessage" style="flex:1" onclick="imessage('${b.passenger_phone}')">💬 iMessage</button>
     </div>`:''}
     <div style="display:flex;gap:8px;margin-top:10px">
-      ${currentRole==='admin'?`<button class="btn btn-primary" style="flex:1" onclick="closeModal();editBooking('${b.id}')">✏️ 編輯</button>`:''}
+      ${currentRole==='admin'?`<button class="btn btn-primary" style="flex:1" onclick="closeModal();editBooking('${b.id}')">✏️ 編輯</button><button class="btn btn-gold btn-sm" onclick="dispatchTelegram(${JSON.stringify(b).replace(/"/g,'&quot;')})">📤 出單</button>`:''}
       <button class="btn btn-ghost" ${currentRole==='admin'?'':'style="flex:1"'} onclick="closeModal()">關閉</button>
     </div>
   `);
@@ -708,6 +708,16 @@ async function syncCompletedToCashflow(){
     alert(`成功同步 ${ok} 張完成單至現金流`);
     renderCashflow();
   }catch(e){alert('同步失敗：'+e.message)}
+}
+
+async function dispatchTelegram(b){
+  if(!confirm(`確認將 ${b.internal_code||'此單'} 發送到 Telegram 司機群組？`))return;
+  try{
+    const res=await fetch('/api/telegram/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+    const data=await res.json();
+    if(!res.ok||data.error)throw new Error(data.error||'發送失敗');
+    alert(`✅ 已發送到 Telegram 群組！`);
+  }catch(e){alert('發送失敗：'+e.message)}
 }
 
 function renderSearch(){
