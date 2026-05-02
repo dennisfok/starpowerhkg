@@ -1,15 +1,22 @@
-# starpowerhkg
+# Fresh Start Project
 
-## 建立新環境
+這個專案已從原本的 `starpowerhkg` 內容抽離，改成全新的起始專案。
 
-1. 複製環境變數範本：
-   ```bash
-   cp .env.example .env.local
-   ```
-2. 編輯 `.env.local`，填入實際的 API Key。
-3. 安裝依賴並啟動開發環境：
-   ```bash
-   npm install
-   npm run dev
-   ```
+## 快速開始
 
+```bash
+npm install
+npm run dev
+```
+
+## 專案結構
+
+- `app/page.jsx`：首頁與新專案入口。
+- `app/layout.jsx`：全域版面設定。
+- `public/`：靜態資源。
+
+## 下一步建議
+
+1. 先定義新專案目標與功能清單。
+2. 依需求新增 API routes 或資料庫連線。
+3. 設定部署流程（如 Vercel）。
